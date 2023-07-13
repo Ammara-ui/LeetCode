@@ -1,0 +1,53 @@
+class Solution {
+    public int[] relativeSort(int[] arr1, int[] arr2) {
+        int len2 = arr2.length;
+        int len1 = arr1.length;
+
+        int[] sortArr = new int[len1];
+
+        int max = arr1[0];
+        int min = arr1[0];
+
+        for(int i=1;i<len1;i++){
+            if(arr1[i]>max){
+                max = arr1[i];
+            }
+            if(arr1[i]<min){
+                min = arr1[i];
+            }
+        }
+
+        int[] arr = new int[max-min+1];
+        Arrays.fill(arr,0);
+
+        Arrays.fill(sortArr,0);
+
+        for(int i=0;i<len1;i++){
+            if(arr1[i]<=max){
+                arr[arr1[i]-min] += 1;
+            }
+        }
+
+        int j=0;
+        for(int i=0;i<len2;i++){
+            while(arr[arr2[i]-min] > 0){
+                sortArr[j] = arr2[i];
+                arr[arr2[i]-min] -= 1;
+                j++;
+            }
+        }
+
+        int len = arr.length; 
+        for(int i=0; i<len; i++){
+            while(arr[i]>0){
+                System.out.println(i);
+                sortArr[j] = i+min;
+                arr[i] -= 1;
+                j++;
+            }
+        }
+
+        return sortArr;
+    }
+}
+
