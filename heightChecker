@@ -1,0 +1,42 @@
+class Solution {
+    public int func(int[] heights) {
+        int len = heights.length;
+        int[] countArr = new int[len];
+        int max = heights[0];
+        int min = heights[0];
+        int mismatch = 0;
+
+        for(int i=1;i<len;i++){
+            if(max < heights[i]){
+                max = heights[i];
+            }
+            if(min > heights[i]){
+                min = heights[i];
+            }
+        }
+
+        int size = max-min+1;
+        int[] arr = new int[size];
+
+        Arrays.fill(arr,0);
+        for(int i=0;i<len;i++){
+            arr[heights[i]-min] += 1;
+        }
+
+        for(int i=0,j=0;i<size;i++){
+
+            while(arr[i] > 0){
+                countArr[j] = i+min;
+                j++;
+                arr[i] -= 1;
+            }
+        }
+
+        for(int i=0;i<len;i++){
+            if(heights[i] != countArr[i]){
+                mismatch++;
+            }
+        }
+
+        return mismatch;
+    }
