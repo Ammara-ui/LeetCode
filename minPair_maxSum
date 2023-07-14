@@ -1,0 +1,39 @@
+class Solution {
+    public int arrayPairSum(int[] nums) {
+        
+        //sort nums - sum even indexes starting 0
+        //pairs in ascending order the give sum of min(ai, bi) for all i is maximized.
+
+        int len = nums.length;
+        int min = nums[0];
+        int max = nums[0];
+        for(int i=1;i<len;i++){
+            if(nums[i] > max){
+                max = nums[i];
+            }
+            else if(nums[i] < min){
+                min = nums[i];
+            }
+        }
+
+        int size = max-min+1;
+        int[] arr = new int[size];
+        for(int i=0; i<len; i++){
+            arr[nums[i]-min] += 1;
+        }
+
+        int sum = 0;
+        int val = 0;
+        for(int i=0; i<size; i++){
+            while(arr[i]>0){
+                if(val % 2 == 0){
+                    sum += i+min;
+                }
+                arr[i] -= 1;
+                val++;
+            }
+        }
+
+        return sum;
+    }
+}
