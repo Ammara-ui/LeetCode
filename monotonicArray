@@ -1,0 +1,25 @@
+class Solution {
+    public boolean isMonotonic(int[] nums) {
+        int len = nums.length;
+        boolean monotone = true;
+        for(int i=0;i<len-1;i++){
+            if(nums[i+1]>nums[i]){
+                monotone = false;
+                i = len;
+            }
+        }
+        if(monotone){
+            return true;
+        }
+        else{
+            monotone = true;
+            for(int i=1;i<len;i++){
+                if(nums[i-1]>nums[i]){
+                    monotone = false;
+                    i = len;
+                }
+            }
+            return monotone;
+        }
+    }
+}
