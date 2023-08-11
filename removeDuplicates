@@ -1,0 +1,32 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int len = nums.length;
+        int max = nums[len-1];
+        if(len >=3){
+            int x = 0;
+            int y = x+1;
+            for(int z=y+1;z<len&&nums[y]<max;){ 
+                if(nums[y]<=nums[x] && nums[z]>nums[x]){
+                    nums[y] = nums[z];
+                    x = y;
+                    y = x+1;
+                    z++;
+                }
+                else if(nums[y]<=nums[x] && nums[z]<=nums[x]){
+                    z++;
+                }
+                else {
+                    x++;
+                    y++;
+                    z++;
+                }
+            }
+        }
+        for(int i=0;i<len;i++){
+            if(nums[i]==max){
+                return i+1;
+            }
+        }
+        return 1;
+    }
+}
