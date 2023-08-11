@@ -4,21 +4,18 @@ class Solution {
         int max = nums[len-1];
         if(len >=3){
             int x = 0;
-            int y = x+1;
-            for(int z=y+1;z<len&&nums[y]<max;){ 
-                if(nums[y]<=nums[x] && nums[z]>nums[x]){
-                    nums[y] = nums[z];
-                    x = y;
-                    y = x+1;
-                    z++;
-                }
-                else if(nums[y]<=nums[x] && nums[z]<=nums[x]){
-                    z++;
+            int y = 1;
+            for(int z=2;z<len&&nums[y]<max;z++){ 
+                if(nums[y]<=nums[x]){
+                    if(nums[z]>nums[x]){
+                        nums[y] = nums[z];
+                        x++;
+                        y++;
+                    }
                 }
                 else {
                     x++;
                     y++;
-                    z++;
                 }
             }
         }
